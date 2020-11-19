@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Make</title>
+    <link href="https://fonts.googleapis.com/earlyaccess/hannari.css" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="head_img">
+        <header>
+            <h1> 本の装丁　承ります</h1>
+        </header>
+    </div>
+    <main>
+        <div class="book_make">
+            <div class="book_name">
+                <div class="author_name_box">
+                    <p>著者名</p>
+                    <input type="text" id="input">
+                </div>
+                <div class="title_name_box">
+                    <p>本のタイトル：</p>
+                    <textarea id="text_area"></textarea>
+                </div>
+            </div>
+            <div class="book">
+                <div class="container">
+                    <div class="cover">
+                        <input type="text" id="book_title">
+                        <!-- <p id="book_title"></p> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu">
+            </div>
+        </div>
+        <div class="switch">
+            <p id="clear" class="clearbotton">クリア</p>
+            <p id="save" class="savebotton">決定</p>
+            <p id="prev" class="prevbotton">プレビュー</p>
+        </div>
+    </main>
+
+    <footer>
+        <small>from G's kadai_03</small>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            //1.Save クリックイベント
+            $('#save').on('click', function () {
+                // var title = $('#input').val();
+                var text  = $('#text_area').val();
+                // オブジェクトを定義
+                var obj   = {
+                    // "title": title,
+                    "text": text
+                };
+                // JSON.stringify(obj) ・・・JSON形式にする
+                var json = JSON.stringify(obj);
+                // localStorage.setItem('memo2', json)　・・・ set save命令
+                localStorage.setItem('memo2', json);
+
+            });
+
+            //2.clear クリックイベント
+            $('#clear').on('click', function () {
+                // localStorage.removeItem('memo2') ・・・remove クリア命令
+                localStorage.removeItem('memo2');
+                // $('#input'). val("");
+                $('#text_area').val("");
+                $('#book_title').val("");
+            });
+
+            //3.ページ読み込み：保存データ取得表示
+            if (localStorage.getItem('memo2')){
+                var json_get = localStorage.getItem('memo2');
+                // JSON.parse(json_get) ・・・JSON 形式からオブジェクトに戻す
+                var obj_get = JSON.parse(json_get);
+                // $('#input').val(obj_get.title);
+                $('#text_area').val(obj_get.text);
+                $('#book_title').val(obj_get.text);
+           }
+
+            //3.prev クリックイベント
+            $('#prev').on('click', function () {
+                var json_get = localStorage.getItem('memo2');
+                // JSON.parse(json_get) ・・・JSON 形式からオブジェクトに戻す
+                var obj_get = JSON.parse(json_get);
+                // $('#input').val(obj_get.title);
+                $('#book_title').val(obj_get.text);
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
