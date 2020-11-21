@@ -20,19 +20,21 @@
     <main>
         <div class="book_make">
             <div class="book_name">
-                <div class="author_name_box">
+                <!-- <div class="author_name_box">
                     <p>著者名</p>
                     <input type="text" id="input">
-                </div>
+                </div> -->
                 <div class="title_name_box">
                     <p>本のタイトル：</p>
-                    <textarea id="text_area"></textarea>
+                    <textarea id="title_name" name="title_name"></textarea>
                 </div>
             </div>
             <div class="book">
                 <div class="container">
                     <div class="cover">
-                        <input type="text" id="book_title">
+                        <P id="book_title"></P>
+                        <!-- <input type="text" id="book_title"> -->
+                        <figure class="back"></figure>
                         <!-- <p id="book_title"></p> -->
                     </div>
                 </div>
@@ -42,9 +44,12 @@
             </div>
         </div>
         <div class="switch">
-            <p id="clear" class="clearbotton">クリア</p>
+            <!-- <p id="clear" class="clearbotton">クリア</p>
             <p id="save" class="savebotton">決定</p>
-            <p id="prev" class="prevbotton">プレビュー</p>
+            <p id="prev" class="prevbotton">プレビュー</p> -->
+            <input type="button" id="clear" class="clearbotton" value="クリア">
+            <input type="button" id="save" class="savebotton" value="決定">
+            <input type="button" id="prev" class="prevbotton" value="プレビュー">
         </div>
     </main>
 
@@ -58,17 +63,19 @@
             //1.Save クリックイベント
             $('#save').on('click', function () {
                 // var title = $('#input').val();
-                var text  = $('#text_area').val();
+                var text  = $('#title_name').val();
                 // オブジェクトを定義
                 var obj   = {
                     // "title": title,
                     "text": text
                 };
+                document.getElementById('book_title').textContent = obj.text;
                 // JSON.stringify(obj) ・・・JSON形式にする
                 var json = JSON.stringify(obj);
                 // localStorage.setItem('memo2', json)　・・・ set save命令
                 localStorage.setItem('memo2', json);
-
+                
+                
             });
 
             //2.clear クリックイベント
@@ -76,7 +83,7 @@
                 // localStorage.removeItem('memo2') ・・・remove クリア命令
                 localStorage.removeItem('memo2');
                 // $('#input'). val("");
-                $('#text_area').val("");
+                $('#title_name').val("");
                 $('#book_title').val("");
             });
 
@@ -86,7 +93,7 @@
                 // JSON.parse(json_get) ・・・JSON 形式からオブジェクトに戻す
                 var obj_get = JSON.parse(json_get);
                 // $('#input').val(obj_get.title);
-                $('#text_area').val(obj_get.text);
+                $('#title_name').val(obj_get.text);
                 $('#book_title').val(obj_get.text);
            }
 
@@ -96,7 +103,8 @@
                 // JSON.parse(json_get) ・・・JSON 形式からオブジェクトに戻す
                 var obj_get = JSON.parse(json_get);
                 // $('#input').val(obj_get.title);
-                $('#book_title').val(obj_get.text);
+                // $('#book_title').val(obj_get.text);
+                $('#title_name').val(obj_get.text);
 
             });
 
